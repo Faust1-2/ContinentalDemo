@@ -1,0 +1,57 @@
+<section class='w-screen h-screen flex items-center justify-start bg-accent-200'>
+  <aside class="mx-auto w-1/2 px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-lg">
+      <h1 class="text-center text-2xl font-bold text-accent-600 sm:text-3xl">Ajouter un membre continental</h1>
+
+      <p class="mx-auto mt-4 max-w-md text-center text-gray-500">
+        Pour ajouter un membre, il faut que celui-ci soit déjà inscrit sur le google workplace.
+        Si son addresse email n'a pas été créée sur le workplace, il ne pourra pas être ajouté.
+      </p>
+
+      <form (submit)='registerUser($event)' class="bg-gray-100 mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8">
+        <p class="text-center text-lg font-medium">Entrez l'email du membre</p>
+
+        <div>
+          <label class="sr-only" for="email">Email</label>
+
+          <div class="relative">
+            <input
+              [formControl]='formGroup.controls.email'
+              class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+              id='email'
+              placeholder="Enter email"
+              type="email"
+            />
+          </div>
+        </div>
+        <button
+          [disabled]='formGroup.invalid'
+          class="block w-full rounded-lg px-5 py-3 text-sm font-medium text-white"
+          color='primary'
+          mat-raised-button
+          type="submit"
+        >
+          Ajouter
+        </button>
+      </form>
+    </div>
+  </aside>
+  <aside class='w-1/2 h-full p-4 flex items-center justify-center'>
+    <table [dataSource]='authService.users.getValue()' class='mat-elevation-z8' mat-table>
+      <!-- Position Column -->
+      <ng-container matColumnDef="email">
+        <th *matHeaderCellDef mat-header-cell> Email </th>
+        <td *matCellDef="let element" mat-cell> {{element.email}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="isConfirmed">
+        <th *matHeaderCellDef mat-header-cell> Confirmé </th>
+        <td *matCellDef="let element" mat-cell> {{ element.isConfirmed }} </td>
+      </ng-container>
+
+      <tr *matHeaderRowDef="columns" mat-header-row></tr>
+      <tr *matRowDef="let row; columns: columns;" mat-row></tr>
+    </table>
+  </aside>
+</section>

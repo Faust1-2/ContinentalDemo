@@ -1,0 +1,91 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: continental-database-service
+spec:
+  selector:
+    app: conti
+    tier: database
+  ports:
+  - port: 5432
+    targetPort: 5432
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: continental-pv-volume
+  labels:
+    type: local
+    app: conti
+    tiers: volume
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/mnt/data"
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: continental-pv-claim
+  labels:
+    app: conti
+    tier: claim
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: continental-database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: conti
+      tier: database
+      track: stable
+  template:
+    metadata:
+      labels:
+        app: conti
+        tier: database
+        track: stable
+    spec:
+      containers:
+      - name: continental-db
+        image: postgres:15.5-alpine
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: postgres-user
+              key: postgres-username
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-pwd
+              key: postgres-password
+        - name: POSTGRES_DB
+          valueFrom:
+            secretKeyRef:
+              name: postgres-db
+              key: postgres-database
+        volumeMounts:
+          - mountPath: /var/lib/postgresql/data
+            name: continentaldb
+      volumes:
+        - name: continentaldb
+          persistentVolumeClaim:
+            claimName: continental-pv-claim

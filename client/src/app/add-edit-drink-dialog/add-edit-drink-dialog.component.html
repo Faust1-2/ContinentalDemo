@@ -1,0 +1,72 @@
+<article *ngIf='!data.addMode' class='h-full w-full'>
+  <h1 mat-dialog-title>
+    {{ data.drink.name }}
+  </h1>
+
+  <div mat-dialog-content>
+    <form (ngSubmit)='editDrink()' [formGroup]='formGroup' class='flex flex-col justify-between'>
+      <mat-form-field>
+        <mat-label>Nom</mat-label>
+        <input [value]='data.drink.name' formControlName='name' matInput required type='text'>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <textarea [value]='data.drink.description ?? ""' formControlName='description' matInput type='text'></textarea>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Prix</mat-label>
+        <input [valueAsNumber]='data.drink.price' formControlName='price' matInput required type='number'>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Type</mat-label>
+        <mat-select [value]='data.drink.type' formControlName='type' required>
+          <span matPrefix><mat-icon>drink</mat-icon></span>
+          <mat-option *ngFor='let category of ["beer", "cocktail", "wine", "mocktail"]' [value]='category'>
+            {{ category }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div mat-dialog-actions>
+        <button mat-button mat-dialog-close>Annuler</button>
+        <button (click)='deleteDrink()' color='warn' mat-button type='button'>Supprimer</button>
+        <button [disabled]='!formGroup.valid' [mat-dialog-close]='data' mat-button type='submit'>Valider</button>
+      </div>
+    </form>
+  </div>
+</article>
+
+<article *ngIf='data.addMode' class='h-full w-full'>
+  <h1 mat-dialog-title>
+    Ajouter une boisson
+  </h1>
+
+  <div mat-dialog-content>
+    <form (ngSubmit)='addDrink()' [formGroup]='formGroup' class='flex flex-col justify-between'>
+      <mat-form-field>
+        <mat-label>Nom</mat-label>
+        <input formControlName='name' matInput required type='text'>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <textarea formControlName='description' matInput type='text'></textarea>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Prix</mat-label>
+        <input formControlName='price' matInput required type='number'>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Type</mat-label>
+        <mat-select formControlName='type' required>
+          <span matPrefix><mat-icon>drink</mat-icon></span>
+          <mat-option *ngFor='let category of ["beer", "cocktail", "wine", "mocktail"]' [value]='category'>
+            {{ category }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div mat-dialog-actions>
+        <button mat-button mat-dialog-close>Annuler</button>
+        <button [disabled]='!formGroup.valid' [mat-dialog-close]='data' mat-button type='submit'>Valider</button>
+      </div>
+    </form>
+  </div>
+</article>

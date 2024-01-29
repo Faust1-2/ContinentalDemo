@@ -1,0 +1,36 @@
+<section class='w-screen h-screen flex flex-col items-center justify-center bg-accent-200'>
+  <article class='w-1/2 h-2/3 rounded bg-primary-200 p-4'>
+    <mat-card>
+      <mat-card-header>
+        <h2 class='text-xl'> Confirmez votre compte continental <span class='text-accent-300'>{{ user?.email }}</span> </h2>
+      </mat-card-header>
+      <mat-card-content>
+        <form (submit)='confirmUser($event)' [formGroup]='formGroup' class='flex flex-col items-start justify-start w-full h-full gap-4 p-4'>
+          <div class='w-full flex items-center justify-start gap-3'>
+            <mat-form-field>
+              <mat-label> Nom </mat-label>
+              <input [formControl]='formGroup.controls.lastName' id='name' matInput name='name' type='text' />
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label> Prénom </mat-label>
+              <input [formControl]='formGroup.controls.firstName' id='firstname' matInput name='firstname' type='text' />
+            </mat-form-field>
+          </div>
+          <div class='w-full flex items-center justify-start gap-3'>
+            <mat-form-field>
+              <mat-label> Mot de passe </mat-label>
+              <input [formControl]='formGroup.controls.password' id='password' matInput name='password' type='password' />
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label> Confirmation Mot de passe </mat-label>
+              <input [formControl]='formGroup.controls.rePassword' id='rePassword' matInput name='rePassword' type='password' />
+            </mat-form-field>
+          </div>
+          <mat-card-actions>
+            <button color='primary' mat-raised-button type='submit'> Confirmer </button>
+          </mat-card-actions>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </article>
+</section>

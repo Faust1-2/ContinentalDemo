@@ -1,0 +1,14 @@
+<h1 mat-dialog-title> Ajouter un nouveau {{data.drinkType}} </h1>
+<form class='flex flex-col items-center justify-center gap-4' mat-dialog-content
+      method='post'>
+  <input class='w-80 h-10 rounded p-2' name='name' placeholder='Nom du plat' type='text'>
+  <input class='w-80 h-10 rounded p-2' name='price' placeholder='Prix du plat' type='number'>
+  <select class='w-82 h-10 rounded p-2' id='type' name='type'>
+    <option disabled value=''>type de la boisson</option>
+    <option value='beer'>bière</option>
+    <option value='wine'>vin</option>
+    <option value='cocktail'>cocktail</option>
+    <option value='mocktail'>mocktail</option>
+  </select>
+  <button class='w-80 h-10 rounded border-none bg-dark-accent hover:cursor-pointer' mat-dialog-actions>Ajouter</button>
+</form>

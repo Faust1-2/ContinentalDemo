@@ -1,0 +1,42 @@
+<section class='mt-14 flex flex-col items-center bg-[#F3E5AB] justify-evenly w-screen h-screen bg-light-shades'>
+  <div class='w-1/2 h-24 ml-12 self-start rounded'>
+    <h1> Menu </h1>
+    <div class='w-full h-full flex items-center justify-between'>
+      <button
+        (click)='openCreateDrinkModal()'
+        color='primary' mat-raised-button>
+        Ajouter une boisson
+      </button>
+      <a
+        color='accent'
+        download
+        href='http://localhost:3000/menu'
+        mat-raised-button
+      >
+        Télécharger le menu
+      </a>
+      <a
+        color='accent'
+        href='/view-menu'
+        mat-raised-button>
+        Voir le menu
+      </a>
+      <button (click)='openUploadTvModal()' color='accent' mat-raised-button>
+        <mat-icon> upload </mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class='flex items-center justify-around w-full h-1/2'>
+    <div *ngFor='let drinkType of drinkTypes' class='h-full w-1/4 text-center'>
+      <h2> {{ drinkType }} </h2>
+      <div class='h-full w-full flex flex-col items-center justify-start gap-3'>
+        <div *ngFor='let drink of getDrink(drinkType)'>
+          <app-drink-card [drink]='drink' />
+        </div>
+        <div *ngIf='getDrink(drinkType).length === 0'>
+          <p> Aucune boisson de ce type </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

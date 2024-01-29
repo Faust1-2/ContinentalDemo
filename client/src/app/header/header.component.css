@@ -1,0 +1,7 @@
+.small-header {
+  @apply h-20;
+}
+
+.header {
+  z-index: 10;
+}

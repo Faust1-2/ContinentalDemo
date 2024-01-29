@@ -1,0 +1,14 @@
+<mat-card
+  (click)='onClick()'
+  class='bg-light-shades hover:cursor-pointer w-80 h-20'
+>
+
+  <mat-card-header>
+    <mat-card-title>
+      {{ drink.name }} - <span class='text-sm'>{{ drink.price }} €</span>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ drink.description }}</p>
+  </mat-card-content>
+</mat-card>

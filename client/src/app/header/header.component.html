@@ -1,0 +1,49 @@
+<mat-toolbar #header
+             [ngClass]='{ "bg-transparent backdrop-blur-sm": transparentBackground, "bg-black": !transparentBackground }'
+             class='fixed z-10 top-0 text-white w-screen h-14 flex items-center justify-between'
+>
+  <a class='mx-4' href='/'>
+    <img alt='logo continental' class='h-12' src='/assets/cont-logo-v2.png'>
+  </a>
+  <div class='w-1/2 h-full flex items-center justify-around'>
+    <a
+      *ngIf='!authService.isAuthenticated()'
+      color='primary'
+      href='/login'
+      mat-raised-button
+    >
+      Login
+    </a>
+
+    <a
+      *ngIf='authService.isAuthenticated()'
+      color='primary'
+      href='/manage/calendar'
+      mat-raised-button
+    >
+      Calendrier
+    </a>
+
+    <a
+      *ngIf='authService.isAuthenticated()'
+      color='primary'
+      href='/manage/users'
+      mat-raised-button>
+      Utilisateurs
+    </a>
+
+    <div *ngIf='authService.isAuthenticated()' class='backdrop-blur flex items-center justify-around text-sm'>
+      <mat-icon aria-hidden='false' aria-label='Account Icon' fontIcon='person' />
+      <div class='flex flex-col items-center justify-center'>
+        <p>{{ authService.user.getValue()?.email }}</p>
+        <p>[{{ authService.user.getValue()?.role }}]</p>
+      </div>
+    </div>
+
+    <div *ngIf='authService.isAuthenticated()'>
+      <button (click)='logout()' color='primary' mat-raised-button>
+        Se déconnecter
+      </button>
+    </div>
+  </div>
+</mat-toolbar>

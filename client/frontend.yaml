@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: continental-frontend-service
+spec:
+  selector:
+    app: conti
+    tier: frontend
+  ports:
+  - protocol: TCP
+    port: 4200
+    targetPort: 4200
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: continental-frontend
+spec:
+  selector:
+    matchLabels:
+      app: conti
+      tier: frontend
+      track: stable
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: conti
+        tier: frontend
+        track: stable
+    spec:
+      containers:
+      - name: continental-frontend
+        image: continental-frontend-1
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 4200

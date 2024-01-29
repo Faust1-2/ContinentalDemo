@@ -1,0 +1,26 @@
+<mat-card *ngIf='events.length > 0'
+          class='rounded h-full w-full flex flex-col items-center backdrop-blur-sm'>
+  <mat-card-header>
+    <div class='w-full h-32 flex items-center justify-between justify-self-start'>
+      <h1 class='text-2xl font-bold' mat-card-title>{{ events[currentEventIndex].name }}</h1>
+    </div>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ formatDate() }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button (click)='previousPage()' class='p-2 bg-dark-accent-100/60 border-none hover:cursor-pointer mr-4'
+            color='accent'
+            mat-raised-button>précédent
+    </button>
+    <button (click)='nextPage()' class='p-2 bg-dark-accent-100/60 border-none hover:cursor-pointer' color='accent'
+            mat-raised-button>
+      prochain
+    </button>
+  </mat-card-actions>
+</mat-card>
+
+<div *ngIf='events.length == 0'
+     class='rounded bg-light-shades h-full w-full p-4 flex flex-col items-center justify-center backdrop-blur-sm bg-light-shades/60'>
+  <h1 class='text-2xl font-bold'>Aucun évènement prochainement</h1>
+</div>

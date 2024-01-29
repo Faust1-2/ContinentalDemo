@@ -1,0 +1,8 @@
+.link-hover {
+  text-decoration: underline 0.15em rgba(0, 0, 0, 0);
+  transition: text-decoration-color 300ms;
+}
+
+.link-hover:hover {
+  text-decoration-color: rgba(0, 0, 0, 1);
+}

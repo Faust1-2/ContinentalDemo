@@ -1,0 +1,111 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: continental-backend-service
+spec:
+  selector:
+    app: conti
+    tier: backend
+  ports:
+  - port: 3000
+    targetPort: 3000
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: continental-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: conti
+      tier: backend
+      track: stable
+  template:
+    metadata:
+      labels:
+        app: conti
+        tier: backend
+        track: stable
+    spec:
+      containers:
+      - name: backend
+        image: continental-backend:0.0.2
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 3000
+        env:
+        - name: FRONT_BASE_URL
+          value: localhost:3000
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: postgres-user
+              key: postgres-username
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-pwd
+              key: postgres-password
+        - name: POSTGRES_DB
+          valueFrom:
+            secretKeyRef:
+              name: postgres-db
+              key: postgres-database
+        - name: POSTGRES_PORT
+          value: "5432"
+        - name: POSTGRES_HOST
+          value: continental-database-service
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: jwt-secret
+              key: secret
+        - name: JWT_EXPIRATION_TIME
+          value: "28800"
+        - name: PGADMIN_DEFAULT_EMAIL
+          valueFrom:
+            secretKeyRef:
+              name: pgadmin-email
+              key: pgadmin-default-email
+        - name: PGADMIN_DEFAULT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: pgadmin-pwd
+              key: pgadmin-password
+        - name: GMAIL_USER
+          valueFrom:
+            secretKeyRef:
+              name: gmail-user
+              key: gmail-username
+        - name: GMAIL_PASS
+          valueFrom:
+            secretKeyRef:
+              name: gmail-pwd
+              key: gmail-password
+        - name: GMAIL_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              name: gmail-client-id
+              key: gmail-id
+        - name: GMAIL_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: gmail-client-secret
+              key: gmail-secret
+        - name: GMAIL_AUTH_CODE
+          valueFrom:
+            secretKeyRef:
+              name: gmail-client-auth-code
+              key: gmail-auth-code
+        - name: GMAIL_REFRESH_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: gmail-client-refresh-token
+              key: gmail-refresh-token
+        - name: GMAIL_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: gmail-client-access-token
+              key: gmail-access-token

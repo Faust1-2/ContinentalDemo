@@ -1,0 +1,63 @@
+<section class='w-full h-full p-4 flex flex-col items-center justify-around'>
+  <h1 class='text-4xl text-accent-500'> Calendrier des évènements </h1>
+  <p class='bg-accent-500 rounded p-4'>
+    Le dashboard permet de s'inscrire, mais aussi de rajouter des créneaux de service qui seront <br />
+    rajoutés dans les google calendars de l'équipe
+
+    <br />
+
+    Les créneaux où vous êtes inscrits sont en <span class='bg-white px-2 text-green-600'>vert</span>, les autres en
+    <span
+      class='bg-white px-2 text-red-600'>rouge</span>
+  </p>
+  <section class='mx-auto w-[80%] h-[50%] mt-4 overflow-y-scroll z-0' id='scheduler'>
+    <ejs-schedule #scheduleObj (actionBegin)='onActionBegin($event)'
+                  (eventRendered)='onEventRender($event)'
+                  (popupOpen)='onPopupOpen($event)'
+                  [eventSettings]='eventSettings.getValue()'
+    >
+      <ng-template #editorTemplate>
+        <h1> Créer / Éditer un évènement </h1>
+        <p *ngIf='editing' class='w-80 bg-dark-accent'>Organisé par </p>
+        <form class='custom-event-editor mt-4'>
+          <div class='padded flex items-center justify-between'>
+            <div class=''>
+              <label class='e-textlabel' for='Subject'>Titre</label>
+              <input class='e-field e-input' id='Subject' name='Subject' style='width: 100%' type='text' value='' />
+            </div>
+            <div>
+              <button [items]='selectedEventBartenders' content='Barmans inscrits' ejs-dropdownbutton></button>
+            </div>
+          </div>
+          <div class='padded'>
+            <label class='e-textlabel' for='EventType'>Description</label>
+            <input class='e-field e-input' id='EventType' name='EventType' style='width: 100%' type='text' />
+          </div>
+          <div class='padded'>
+            <label class='e-textlabel' for='StartTime'>De</label>
+            <ejs-datetimepicker class='e-field' id='StartTime' name='StartTime'></ejs-datetimepicker>
+          </div>
+          <div class='padded'>
+            <label class='e-textlabel' for='EndTime'>À</label>
+            <ejs-datetimepicker class='e-field' id='EndTime' name='EndTime'></ejs-datetimepicker>
+          </div>
+          <div class='padded'>
+            <label class='e-textlabel' for='RecurrenceRule'>Recurrence</label>
+            <ejs-recurrenceeditor id='RecurrenceRule' name='RecurrenceRule' />
+          </div>
+        </form>
+      </ng-template>
+    </ejs-schedule>
+    <ejs-contextmenu #menuObj (beforeOpen)='onContextMenuBeforeOpen($event)' (select)='onMenuItemSelect($event)'
+                     [items]='menuItems'
+                     cssClass='schedule-context-menu' target='.e-schedule' />
+    <ejs-toast #toastObj [position]='position'>
+      <ng-template #title>
+        <div>Matt sent you a friend request</div>
+      </ng-template>
+      <ng-template #content>
+        <div>Hey, wanna dress up as wizards and ride our hoverboards?</div>
+      </ng-template>
+    </ejs-toast>
+  </section>
+</section>

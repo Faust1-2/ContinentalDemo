@@ -1,0 +1,11 @@
+# compiled output
+/api/dist
+/api/node_modules
+/client/dist
+/client/node_modules
+/client/angular.json
+/client/.angular/
+.idea
+/api/.env
+/client/.env
+docker.env

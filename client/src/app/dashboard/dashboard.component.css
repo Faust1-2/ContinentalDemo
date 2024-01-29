@@ -1,0 +1,7 @@
+.padded {
+  @apply p-4
+}
+
+.subscribed {
+  border: #b05c4a;
+}

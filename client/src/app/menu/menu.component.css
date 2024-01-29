@@ -1,0 +1,11 @@
+.panels {
+  @apply p-10;
+}
+
+.list {
+  border-right: 1px solid white;
+}
+
+.round {
+  @apply rounded;
+}

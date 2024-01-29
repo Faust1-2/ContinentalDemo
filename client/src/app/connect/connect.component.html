@@ -1,0 +1,29 @@
+<section class='w-screen h-screen flex flex-col items-center justify-center bg-accent-100'>
+  <mat-card class='w-1/2 h-1/2 bg-light-shades p-4'>
+    <mat-card-title>
+      Connexion
+    </mat-card-title>
+    <mat-card-content class='mt-4 flex items-center justify-around'>
+      <form (submit)='login()' [formGroup]='formGroup' class='w-full flex gap-4 items-start justify-around'>
+        <div class='flex flex-col items-start justify-start gap-4'>
+          <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input formControlName='email' matInput placeholder='Votre email' type='email'>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Mot de passe</mat-label>
+            <input formControlName='password' matInput placeholder='Mot de passe' type='password'>
+          </mat-form-field>
+          <p *ngIf='error' class='text-red-500'>Ce compte n'existe pas</p>
+          <mat-card-actions>
+            <button [disabled]='!formGroup.valid' color='primary' mat-raised-button type='submit'>Se connecter</button>
+          </mat-card-actions>
+        </div>
+
+        <div class='w-1/2 p-4 bg-accent-200 rounded'>
+          <p> Seuls les membres du continental ont accès au panel administrateur </p>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</section>
