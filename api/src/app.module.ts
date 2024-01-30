@@ -5,7 +5,6 @@ import { DrinksModule } from '@/drinks/drinks.module';
 import { MenuModule } from '@/menu/menu.module';
 import { EventsModule } from '@/events/events.module';
 import { UsersModule } from '@/users/users.module';
-import { AuthenticationModule } from '@/authentication/authentication.module';
 import { ContconfigModule } from '@/contconfig/contconfig.module';
 import { MailerModule } from '@/mailer/mailer.module';
 
@@ -15,7 +14,6 @@ import { MailerModule } from '@/mailer/mailer.module';
     MenuModule,
     EventsModule,
     UsersModule,
-    AuthenticationModule,
     ContconfigModule,
     MailerModule.forRoot(),
   ],

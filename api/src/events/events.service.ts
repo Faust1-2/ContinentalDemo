@@ -4,7 +4,6 @@ import { MoreThanOrEqual, Repository } from 'typeorm';
 import { UsersService } from '../users/users.service';
 import { EventCreateDto, EventEditDto } from './dto/event.dto';
 import { Event } from './entities/event.entity';
-import { AuthenticationService } from '../authentication/authentication.service';
 import { Request } from 'express';
 
 @Injectable()
@@ -12,7 +11,6 @@ export class EventsService {
   constructor(
     @InjectRepository(Event) private readonly events: Repository<Event>,
     private userService: UsersService,
-    private authService: AuthenticationService,
   ) {}
 
   async create(event: EventCreateDto, req: Request) {
@@ -57,8 +55,7 @@ export class EventsService {
     const event = await this.events.findOne({
       where: { id },
     });
-    const userId = await this.authService.getConnectedUserId(req);
-    return event.bartenders.some((user) => user.userId === userId);
+    return false;
   }
 
   async subscribe(id: string, req: Request) {
@@ -66,13 +63,8 @@ export class EventsService {
       where: { id },
       relations: ['bartenders'],
     });
-    const userId = await this.authService.getConnectedUserId(req);
 
-    if (event.bartenders.some((user) => user.userId === userId))
-      throw new HttpException('Already subscribed', 400);
-
-    event.bartenders.push(await this.userService.getById(userId));
-    return await this.events.save(event);
+    return event;
   }
 
   async unsubscribe(id: string, req: Request) {
@@ -80,14 +72,6 @@ export class EventsService {
       where: { id },
       relations: ['bartenders'],
     });
-    const userId = await this.authService.getConnectedUserId(req);
-
-    if (!event.bartenders.some((user) => user.userId === userId))
-      throw new HttpException('Not subscribed', 400);
-
-    event.bartenders = event.bartenders.filter(
-      (user) => user.userId !== userId,
-    );
 
     return await this.events.save(event);
   }

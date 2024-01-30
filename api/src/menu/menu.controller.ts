@@ -1,7 +1,6 @@
 import { Body, Controller, Get, Post, Res, UseGuards } from '@nestjs/common';
 import { MenuService } from './menu.service';
 import { Response } from 'express';
-import JwtAuthGuard from '@/authentication/jwt-auth.guard';
 import { ApiBody } from '@nestjs/swagger';
 
 @Controller('menu')
@@ -27,7 +26,6 @@ export class MenuController {
       },
     },
   })
-  @UseGuards(JwtAuthGuard)
   async uploadToTv(@Res() response: Response, @Body('fileId') fileId?: string) {
     if (!['1', '2'].includes(fileId)) {
       return response.status(400).send({

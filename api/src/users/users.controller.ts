@@ -12,7 +12,6 @@ import { UsersService } from '@/users/users.service';
 import { Request } from 'express';
 import { UserContinental } from '@/users/entities/user.entity';
 import { ApiBody } from '@nestjs/swagger';
-import JwtAuthGuard from '@/authentication/jwt-auth.guard';
 import { RegisterUserDto } from '@/users/dto/RegisterUserDto';
 
 @Controller('users')
@@ -25,7 +24,6 @@ export class UsersController {
   }
 
   @Patch(':id')
-  @UseGuards(JwtAuthGuard)
   @ApiBody({
     type: UserContinental,
   })
@@ -48,7 +46,6 @@ export class UsersController {
   }
 
   @Get('subscriptions')
-  @UseGuards(JwtAuthGuard)
   getSubscriptions(@Req() req: Request) {
     return this.userService.getSubscriptions(req);
   }
