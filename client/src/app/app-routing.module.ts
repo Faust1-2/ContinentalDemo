@@ -3,9 +3,7 @@ import { HomeComponent } from '@app/home/home.component';
 import { MenuComponent } from '@app/menu/menu.component';
 import { DashboardComponent } from '@app/dashboard/dashboard.component';
 import { NgModule } from '@angular/core';
-import { ConnectComponent } from '@app/connect/connect.component';
 import { ViewMenuComponent } from '@app/view-menu/view-menu.component';
-import { ConfirmUserComponent } from '@app/confirm-user/confirm-user.component';
 import { DashboardUserComponent } from '@app/dashboard-user/dashboard-user.component';
 
 
@@ -25,10 +23,6 @@ const routes: Routes = [
   {
     path: 'manage/calendar',
     component: DashboardComponent,
-  },
-  {
-    path: 'confirm_account/:token',
-    component: ConfirmUserComponent
   },
   {
     path: 'manage/users',

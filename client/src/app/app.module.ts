@@ -29,13 +29,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
-import { ConnectComponent } from '@app/connect/connect.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ViewMenuComponent } from '@app/view-menu/view-menu.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BaseInterceptor } from '@app/base.interceptor';
 import { environment } from '@app/environment';
-import { ConfirmUserComponent } from '@app/confirm-user/confirm-user.component';
 import { DashboardUserComponent } from './dashboard-user/dashboard-user.component';
 import { GridModule } from '@syncfusion/ej2-angular-grids';
 import { ButtonModule } from '@syncfusion/ej2-angular-buttons';
@@ -55,9 +53,7 @@ import { UploadTvDialogComponent } from './upload-tv-dialog/upload-tv-dialog.com
     EventCardComponent,
     DrinkCardComponent,
     AddEditDrinkDialogComponent,
-    ConnectComponent,
     ViewMenuComponent,
-    ConfirmUserComponent,
     DashboardUserComponent,
     UploadTvDialogComponent,
   ],
