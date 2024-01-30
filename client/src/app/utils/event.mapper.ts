@@ -12,8 +12,6 @@ export class EventMapper {
       name: event.Subject as string,
       startDate: event.StartTime as string,
       endDate: event.EndTime as string,
-      organizer: 'organizer',
-      bartenders: [],
       isReadonly: Boolean(event.IsReadonly),
       image: undefined,
       isAllDay: event.IsAllDay,

@@ -12,7 +12,7 @@ export class EventsService {
   }
 
   public getEvents(upToDate = false) {
-    return this.httpClient.get<ContEvent[]>('events', {
+    return this.httpClient.get<ContEvent[]>('events/', {
       withCredentials: true,
       params: {
         upToDate: upToDate.toString(),
@@ -21,26 +21,26 @@ export class EventsService {
   }
 
   public getEvent(eventId: string) {
-    return this.httpClient.get<ContEvent>('events' + eventId, {
+    return this.httpClient.get<ContEvent>('events/' + eventId, {
       withCredentials: true,
     });
   }
 
   public addEvent(event: SchedulerEvent) {
     console.log(event);
-    return this.httpClient.post<ContEvent>('events', this.eventMapper.mapToEvent(event), {
+    return this.httpClient.post<ContEvent>('events/', this.eventMapper.mapToEvent(event), {
       withCredentials: true,
     });
   }
 
   public updateEvent(event: SchedulerEvent) {
-    return this.httpClient.patch<ContEvent>('events' + event.Id, this.eventMapper.mapToEvent(event), {
+    return this.httpClient.patch<ContEvent>('events/' + event.Id, this.eventMapper.mapToEvent(event), {
       withCredentials: true,
     });
   }
 
   public deleteEvent(event: SchedulerEvent) {
-    return this.httpClient.delete<ContEvent>('events' + event.Id, {
+    return this.httpClient.delete<ContEvent>('events/' + event.Id, {
       withCredentials: true,
     });
   }

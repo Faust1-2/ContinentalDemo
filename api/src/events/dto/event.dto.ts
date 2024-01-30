@@ -32,13 +32,6 @@ export class EventCreateDto {
   endDate: Date;
 
   @ApiProperty({
-    description: 'The id of the organizer of the event',
-    type: String,
-    example: 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa',
-  })
-  organizer: string;
-
-  @ApiProperty({
     description: 'Does the event span the whole day',
     type: Boolean,
   })
@@ -69,4 +62,4 @@ export class EventCreateDto {
   bartenders: UserContinental[];
 }
 
-export type EventEditDto = Omit<EventCreateDto, 'organizer'>;
+export type EventEditDto = EventCreateDto;

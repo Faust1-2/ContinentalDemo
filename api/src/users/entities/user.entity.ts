@@ -33,9 +33,6 @@ export class UserContinental {
   })
   role: ContinentalRoles;
 
-  @OneToMany(() => Event, (event) => event.organizer)
-  events: Event[];
-
   @ManyToMany(() => Event, (event) => event.bartenders)
   bartendingEvents: Event[];
 

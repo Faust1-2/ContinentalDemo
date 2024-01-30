@@ -7,29 +7,11 @@
   </a>
   <div class='w-1/2 h-full flex items-center justify-around'>
     <a
-      *ngIf='!authService.isAuthenticated()'
-      color='primary'
-      href='/login'
-      mat-raised-button
-    >
-      Login
-    </a>
-
-    <a
-      *ngIf='authService.isAuthenticated()'
       color='primary'
       href='/manage/calendar'
       mat-raised-button
     >
       Calendrier
-    </a>
-
-    <a
-      *ngIf='authService.isAuthenticated()'
-      color='primary'
-      href='/manage/users'
-      mat-raised-button>
-      Utilisateurs
     </a>
 
     <div *ngIf='authService.isAuthenticated()' class='backdrop-blur flex items-center justify-around text-sm'>

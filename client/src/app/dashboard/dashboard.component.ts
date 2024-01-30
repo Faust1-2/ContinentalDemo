@@ -107,9 +107,9 @@ export class DashboardComponent implements OnInit {
   private subscribedEvents: string[] = [];
 
   constructor(private eventsService: EventsService, private eventMapper: EventMapper) {
-    firstValueFrom(this.eventsService.getSubscribedEvents()).then((events) => {
-      this.subscribedEvents = events.map((event) => event.id);
-    });
+    // firstValueFrom(this.eventsService.getSubscribedEvents()).then((events) => {
+    //   this.subscribedEvents = events.map((event) => event.id);
+    // });
   }
 
   async ngOnInit() {
@@ -248,7 +248,6 @@ export class DashboardComponent implements OnInit {
           this.selectedBartendersCalled = '';
 
           this.eventsService.getEvent(eventId as string).subscribe((event) => {
-            this.selectedEventBartenders = event.bartenders.map((bartender) => ({ text: bartender.email }));
             this.selectedBartendersCalled = event.id;
 
             if (this.selectedEventBartenders.length === 0) {

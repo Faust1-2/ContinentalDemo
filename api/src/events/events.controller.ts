@@ -14,7 +14,6 @@ import { EventsService } from './events.service';
 import { ApiBody, ApiParam, ApiTags } from '@nestjs/swagger';
 import { EventCreateDto, EventEditDto } from './dto/event.dto';
 import { Request } from 'express';
-import JwtAuthGuard from '../authentication/jwt-auth.guard';
 
 @Controller('events')
 @ApiTags('events')
@@ -22,7 +21,6 @@ export class EventsController {
   constructor(private readonly eventsService: EventsService) {}
 
   @Post()
-  @UseGuards(JwtAuthGuard)
   @ApiBody({
     type: EventCreateDto,
   })
@@ -45,8 +43,16 @@ export class EventsController {
     return this.eventsService.findOne(id);
   }
 
+  @Delete(':id')
+  @ApiParam({
+    name: 'id',
+    type: String,
+  })
+  deleteOne(@Param('id') id: string) {
+    return this.eventsService.remove(id);
+  }
+
   @Patch(':id')
-  @UseGuards(JwtAuthGuard)
   @ApiParam({
     name: 'id',
     type: String,
@@ -56,17 +62,15 @@ export class EventsController {
   }
 
   @Get(':id/subscribe')
-  @UseGuards(JwtAuthGuard)
   @ApiParam({
     name: 'id',
     type: String,
   })
   isSubscribed(@Param('id') id: string, @Req() req: Request) {
-    return this.eventsService.isSubscribed(id, req);
+    return false
   }
 
   @Post(':id/subscribe')
-  @UseGuards(JwtAuthGuard)
   @ApiParam({
     name: 'id',
     type: String,
@@ -76,7 +80,6 @@ export class EventsController {
   }
 
   @Delete(':id/subscribe')
-  @UseGuards(JwtAuthGuard)
   @ApiParam({
     name: 'id',
     type: String,

@@ -3,7 +3,6 @@ import {
   Entity,
   JoinTable,
   ManyToMany,
-  ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { UserContinental } from '../../users/entities/user.entity';
@@ -43,9 +42,6 @@ export class Event {
 
   @Column({ type: 'boolean', nullable: false, default: false })
   isReadonly: boolean;
-
-  @ManyToOne(() => UserContinental, (user) => user.events)
-  organizer: UserContinental;
 
   @ManyToMany(() => UserContinental, (user) => user.bartendingEvents)
   @JoinTable()

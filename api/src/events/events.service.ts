@@ -21,9 +21,6 @@ export class EventsService {
     newEvent.type = event.type;
     newEvent.startDate = event.startDate;
     newEvent.endDate = event.endDate;
-    newEvent.organizer = await this.userService.getById(
-      await this.authService.getConnectedUserId(req),
-    );
     newEvent.isAllDay = event.isAllDay;
     newEvent.isReadonly = event.isReadonly;
     newEvent.recurrenceRule = event.recurrenceRule;
@@ -32,21 +29,19 @@ export class EventsService {
   }
 
   findAll(upToDate = false) {
-    if (upToDate)
-      return this.events.find({
+    if (upToDate) {
+      const result = this.events.find({
         where: { startDate: MoreThanOrEqual(new Date(Date.now())) },
-        relations: ['bartenders', 'organizer'],
-      });
+      }).then((events) => events);
+      return result;
+    }
     else
-      return this.events.find({
-        relations: ['organizer', 'bartenders'],
-      });
+      return this.events.find().then((events) => events);
   }
 
   findOne(id: string) {
     return this.events.findOne({
       where: { id },
-      relations: ['bartenders', 'organizer'],
     });
   }
 
@@ -61,7 +56,6 @@ export class EventsService {
   async isSubscribed(id: string, req: Request) {
     const event = await this.events.findOne({
       where: { id },
-      relations: ['bartenders'],
     });
     const userId = await this.authService.getConnectedUserId(req);
     return event.bartenders.some((user) => user.userId === userId);

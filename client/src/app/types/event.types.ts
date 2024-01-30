@@ -11,8 +11,6 @@ export interface Event {
   recurrenceRule?: string;
   recurrenceException?: string;
   isReadonly?: boolean;
-  organizer: string;
-  bartenders: User[];
 }
 
 export type ContEvent = Event;

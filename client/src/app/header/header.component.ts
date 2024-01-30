@@ -13,7 +13,6 @@ export class HeaderComponent implements OnInit {
   @ViewChild('header') header?: HTMLElement;
   public links = [
     { name: 'Menu', path: '/menu', auth: false },
-    { name: 'Login', path: '/login', auth: false },
     { name: 'Dashboard', path: '/dashboard', auth: true },
   ];
 
