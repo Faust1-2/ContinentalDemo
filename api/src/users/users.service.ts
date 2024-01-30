@@ -6,8 +6,6 @@ import { NewUserDto } from '@/users/dto/NewUserDto';
 import { Request } from 'express';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
-import { ContinentalMailingService } from '@/mailer/continental_mailing.service';
-import mail_template from '@/mailer/template/mail_template';
 import { RegisterUserDto } from '@/users/dto/RegisterUserDto';
 import * as bcrypt from 'bcrypt';
 
@@ -19,7 +17,6 @@ export class UsersService {
     @InjectRepository(UserContinental) private users: Repository<UserContinental>,
     private jwtService: JwtService,
     private readonly configService: ConfigService,
-    private readonly continentalMailing: ContinentalMailingService,
   ) {}
 
   async getByEmail(email: string, withPassword?: boolean) {
@@ -79,16 +76,6 @@ export class UsersService {
         { userId: savedUser.userId },
         { secret: this.configService.get('JWT_SECRET') },
       );
-      await this.continentalMailing.sendMail({
-        to: user.email,
-        from: 'Welcome <welcome@continental-efrei.fr>',
-        subject: 'Bienvenue sur le site de Continental',
-        html: mail_template(
-          `${this.configService.get(
-            'FRONT_BASE_URL',
-          )}/confirm_account/${token}`,
-        ),
-      });
     } catch (error) {
       this.logger.error('Error while sending mail', error);
     }
