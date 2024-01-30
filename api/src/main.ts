@@ -23,7 +23,6 @@ async function bootstrap() {
     origin: [
       process.env.FRONT_BASE_URL,
       'http://localhost:4200',
-      'http://localhost:35805',
     ],
     credentials: true,
   });

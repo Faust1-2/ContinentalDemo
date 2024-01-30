@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
       - name: continental-frontend
-        image: continental-frontend-1
+        image: continental-frontend:latest
         imagePullPolicy: Never
         ports:
         - containerPort: 4200

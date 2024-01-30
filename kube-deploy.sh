@@ -1,3 +1,6 @@
+docker build -t continental-frontend -f ./client/Dockerfile ./client
+docker build -t continental-backend -f ./api/Dockerfile ./api
+
 kubectl apply -f database.yaml
 kubectl apply -f api/backend.yaml
 kubectl apply -f client/frontend.yaml
