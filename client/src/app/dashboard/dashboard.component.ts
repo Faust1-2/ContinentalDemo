@@ -88,16 +88,6 @@ export class DashboardComponent implements OnInit {
         id: 'DeleteSeries',
       }],
     },
-    {
-      text: 'S\'inscrire sur ce créneau',
-      id: 'Subscribe',
-      iconCss: 'e-icons e-delete',
-    },
-    {
-      text: 'Se désinscrire de ce créneau',
-      id: 'Unsubscribe',
-      iconCss: 'e-icons e-delete',
-    },
   ];
 
   public eventSettings: BehaviorSubject<EventSettingsModel> = new BehaviorSubject<EventSettingsModel>({});
