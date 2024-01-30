@@ -37,20 +37,11 @@ spec:
         - containerPort: 3000
         env:
         - name: POSTGRES_USER
-          valueFrom:
-            secretKeyRef:
-              name: postgres-user
-              key: postgres-username
+          value: continental
         - name: POSTGRES_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: postgres-pwd
-              key: postgres-password
+          value: admin
         - name: POSTGRES_DB
-          valueFrom:
-            secretKeyRef:
-              name: postgres-db
-              key: postgres-database
+          value: continental
         - name: POSTGRES_PORT
           value: "5432"
         - name: POSTGRES_HOST
