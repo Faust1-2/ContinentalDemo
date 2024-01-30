@@ -27,7 +27,7 @@ export class DrinksController {
     @Res() response: Response,
   ): Promise<void> {
     const d = await this.service.createDrink(drink);
-    return response.send(d).redirect(response.req.headers.host);
+    return response.redirect(`${response.req.headers.host}/${d.id}`);
   }
 
   @Delete(':id')
