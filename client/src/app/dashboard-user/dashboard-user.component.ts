@@ -24,14 +24,6 @@ export class DashboardUserComponent {
     event.preventDefault();
     const email = this.formGroup.get('email')?.value;
 
-    if (email) {
-      this.authService.register({ email }).subscribe(() => {
-        this.formGroup.reset();
-        this.authService.getUsers();
-        this.toastr.success('Utilisateur créé avec succès !', 'Succès');
-      });
-    } else {
-      this.toastr.error('Veuillez renseigner un email', 'Erreur');
-    }
+    this.toastr.error('User cannot be registered at this time. API does not support this feature in demo mode.');
   }
 }
