@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Res, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, Res } from '@nestjs/common';
 import { MenuService } from './menu.service';
 import { Response } from 'express';
 import { ApiBody } from '@nestjs/swagger';

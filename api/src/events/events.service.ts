@@ -1,7 +1,6 @@
-import { HttpException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MoreThanOrEqual, Repository } from 'typeorm';
-import { UsersService } from '../users/users.service';
 import { EventCreateDto, EventEditDto } from './dto/event.dto';
 import { Event } from './entities/event.entity';
 import { Request } from 'express';
@@ -10,7 +9,6 @@ import { Request } from 'express';
 export class EventsService {
   constructor(
     @InjectRepository(Event) private readonly events: Repository<Event>,
-    private userService: UsersService,
   ) {}
 
   async create(event: EventCreateDto, req: Request) {
